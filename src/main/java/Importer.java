@@ -19,7 +19,8 @@ public class Importer {
         String start = input[1];
         String end = input[2];
         String path = input[3];
-        //String appKey = "Bn6k1JxTLI";
+        //index,comments
+        String kind = input[4];
 
         IntStream.rangeClosed(Integer.valueOf(start), Integer.valueOf(end)).forEach(value -> {
             try {
@@ -29,7 +30,7 @@ public class Importer {
             }
             String index = String.valueOf(value);
             CloseableHttpClient httpclient = HttpClients.createDefault();
-            String query = String.format("http://a.wykop.pl/link/index/%s/appkey,%s", index, appKey);
+            String query = String.format("http://a.wykop.pl/link/%s/%s/appkey,%s",kind, index, appKey);
             HttpGet method = new HttpGet(query);
             try (CloseableHttpResponse execute = httpclient.execute(method)) {
                 System.out.println(execute.getStatusLine().getStatusCode());
